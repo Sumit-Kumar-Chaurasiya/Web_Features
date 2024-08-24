@@ -1,0 +1,7 @@
+To add title of a website or a web page use <title> tag 
+i.e 
+
+<title>Hello World! (Write title inside this tag)</title> 
+
+ Then, title tag is place inside <head> tag.
+
