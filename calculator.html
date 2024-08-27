@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKC Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 300px;
+            height: 630px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #C0C0C0;
+            background-color: #C0C0C0;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px #888;
+        }
+
+        .top-container {
+            margin: 10px 15px;
+            font-size: 22px;
+            font-weight: 550;
+            color: #444;
+        }
+
+        .screen {
+            height: 100px;
+            border: 2px solid transparent;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+
+        /* ---------------acives modes css code start------------*/
+        .active_modes {
+            padding-top: -10px;
+            font-size: 8.2px;
+            font-weight: bolder;
+            color: rgb(72, 72, 142);
+            opacity: 0.5;
+        }
+
+        #m1,
+        #m2,
+        #m6,
+        #m7,
+        #m8 {
+            background-color: rgb(72, 72, 142);
+            color: white;
+            padding: 0 1px;
+        }
+
+        /* ---------------active modes css code end -------------*/
+        .variable_screen {
+            height: calc(100% - 15px);
+            margin-top: 5px;
+            background-color: rgb(175, 175, 245);
+            opacity: 0.45;
+        }
+
+        .table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+        td {
+
+            text-align: center;
+        }
+
+        .upr_tbl tr td {
+            max-width: 50px;
+        }
+
+        .lwr_tbl tr td {
+            width: 60px;
+        }
+
+        .upr_tbl tr td button {
+            height: 25px;
+            background-color: black;
+            color: white;
+            font-weight: 500;
+            padding: 4px;
+        }
+
+        .lwr_tbl tr td button {
+            height: 35px;
+            background-color: white;
+            color: black;
+            font-weight: 700;
+            padding: 8px;
+            font-size: 18px;
+        }
+
+        button {
+            width: 85%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .circle_btn {
+            border-radius: 100%;
+            border: none;
+            background-color: rgb(91, 91, 139);
+            opacity: 0.8;
+            margin: 1px;
+        }
+
+
+        .upr_tbl tr .circle_btn button {
+            width: fit-content;
+            color: white;
+            font-size: 20px;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        .upr_tbl tr .fun_btn {
+            border-radius: 100%;
+            background-color: rgb(91, 91, 139);
+        }
+
+        .shift {
+            font-weight: 700;
+            font-size: 9px;
+            color: rgb(233, 165, 7);
+        }
+
+        .alpha {
+            font-weight: 700;
+            font-size: 9px;
+            color: rgb(206, 84, 106);
+            line-height: -2px;
+        }
+
+        .grn {
+            font-weight: 700;
+            font-size: 9px;
+            color: green;
+        }
+        math{
+            font-weight:bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" class="container">
+        <div class="top-container">
+            SKC-3264 Calculator
+        </div>
+        <section class="screen">
+            <div class="active_modes" id="active_modes">
+                <span id="m1">S</span>
+                <span id="m2">A</span>
+                <span id="m3">M</span>
+                <span id="m4">STORCAL</span>
+                <span id="m5">STATCOMPLXMATVCT</span>
+                <span id="m6">D</span>
+                <span id="m7">R</span>
+                <span id="m8">G</span>
+                <span id="m9">CFIXSCI</span>
+                <span id="m10">Math</span>
+                <span id="m11">▼▲</span>
+                <span id="m12">Disp</span>
+            </div>
+            <div id="variable_screen" class="variable_screen">
+                <div class="input_section" id="input_section"></div>
+                <div class="output_section" id="output_section"></div>
+            </div>
+        </section>
+        <section class="buttons" id="buttons">
+            <div class="upr_buttons" id="upr_buttons">
+                <table class="upr_tbl table">
+                    <tr>
+                        <td>
+                            <span class="shift">SHIFT</span>
+                            <button id="b1" class="fun_btn"></button>
+                        </td>
+                        <td>
+                            <span class="alpha">ALPHA</span>
+                            <button id="b2" class="fun_btn"></button>
+                        </td>
+                        <td colspan="2" rowspan="2" class="circle_btn">
+                            <button id="b3">▲</button><br />
+                            <button id="b4">◀</button>
+                            <span style="font-size:8px;color:rgb(111, 111, 255);fill-opacity: 1;">REPLAY</span>
+                            <button id="b5">▶</button><br />
+                            <button id="b6">▼</button>
+                        </td>
+                        <td>
+                            <span class="alpha" style="color:black">MODE</span><span class="shift">SETUP</span>
+                            <button id="b7" class="fun_btn"></button>
+                        </td>
+                        <td>
+                            <span class="alpha" style="color:black;">ON</span>
+                            <button id="b8" class="fun_btn"></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="shift">SOLVE</span> <span class="alpha">=</span>
+                            <button id="b9">CALC</button>
+                        </td>
+                        <td>
+                            <span class="shift">
+                                <math style="display:inline-block;font-size:10px;padding-bottom:1px;">
+                                    <mrow>
+                                        <mfrac linethickness="normal">
+                                            <mo>d</mo>
+                                            <mo>dx</mo>
+                                        </mfrac>
+                                        <mn>▬</mn>
+                                    </mrow>
+                                </math> 
+                            </span>&nbsp;<span class="alpha">:</span>
+                            <button id="b10">
+                                <math display="block" style="font-size:10px;">
+                                    <mrow>
+                                    <msubsup>
+                                      <mo>&#x222B;</mo>
+                                      <mn>▭</mn>
+                                      <mn>▭</mn>
+                                    </msubsup>
+                                    <mn>▬</mn>
+                                    </mrow>
+                                  </math>
+                            </button>
+                        </td>
+                        <td>
+                            <span class="shift">ϰ!</span>
+                            <button id="b11">ϰ<sup>-1</sup></button>
+                        </td>
+                        <td>
+                            <span class="shift">
+                                <math display="block" style="font-weight:bolder;font-size:7px;padding-bottom:1.5px;">
+                                    <mrow>
+                                      <munderover>
+                                        <mo>∑</mo>
+                                        <mrow>
+                                          <mi>▭</mi>
+                                        </mrow>
+                                        <mrow>
+                                          <mn>▭</mn>
+                                        </mrow>
+                                      </munderover>
+                                      <mn>▬</mn>
+                                    </mrow>
+                                  </math>
+                            </span>
+                            <button id="b12">
+                                log■▯
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="shift">
+                                <math display="block">
+                                    <mrow>
+                                        <mn>▭</mn>
+                                        <mfrac linethickness="normal">
+                                            <mi>▭</mi>
+                                            <mi>▭</mi>
+                                        </mfrac>
+                                    </mrow>
+                                </math>
+                            </span>
+                            <button id="b13">
+                                <math display="block">
+                                    <maction actiontype="toggle" style="font-size:10px;">
+                                        <mfrac>
+                                            <mn>▬</mn>
+                                            <mn>▭</mn>
+                                        </mfrac>
+                                    </maction>
+                                </math>
+                            </button>
+                        </td>
+                        <td>
+                            <span class="shift">
+                                <math display="block">
+                                    <maction actiontype="toggle" style="font-size:10px;padding:4px;">
+                                        <mroot>
+                                            <mn>▭</mn>
+                                            <mn>3</mn>
+                                        </mroot>
+                                    </maction>
+                                </math>
+                            </span>
+                            <button id="b14">
+                                <math display="block">
+                                    <mroot>
+                                        <mi>▭</mi>
+                                        <mn></mn>
+                                    </mroot>
+                                </math>
+                            </button>
+                        </td>
+                        <td>
+                            <span class="shift">ϰ<sup>3</sup></span> <span class="grn">DEC</span>
+                            <button id="b15">ϰ<sup>2</sup></button>
+                        </td>
+                        <td>
+                            <span class="shift">
+                                <math style="display:inline-block;font-size:10px;">
+                                    <mroot>
+                                        <mn>□</mn>
+                                        <mn>□</mn>
+                                    </mroot>
+                                </math>
+                            </span> <span class="grn">HEX</span>
+                            <button id="b16">ϰ<sup>■</sup></button>
+                        </td>
+                        <td>
+                            <span class="shift">
+                                10<sup>■</sup>
+                            </span> <span class="grn">BIN</span>
+                            <button id="b17">log</button>
+                        </td>
+                        <td>
+                            <span class="shift">
+                                e<sup>■</sup> 
+                            </span> <span class="grn"> OCT</span>
+                            <button id="b18">ln</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="grn">[<span class="shift">∠</span>] [<span class="alpha">A</span>]</span>
+                            <button id="b19">(—)</button>
+                        </td>
+                        <td>
+                            <span class="grn"><span class="shift">← </span> [<span class="alpha">B</span>]</span>
+                            <button id="b20">○, ,,</button>
+                        </td>
+                        <td>
+                            <span class="grn"><span class="shift">Abs</span> [<span class="alpha">C</span>]</span>
+                            <button id="b21">hyp</button>
+                        </td>
+                        <td>
+                            <span class="grn"><span class="shift">sin⁻¹</span> [<span class="alpha">D</span>]</span>
+                            <button id="b22">sin</button>
+                        </td>
+                        <td>
+                            <span class="grn"><span class="shift">cos⁻¹</span> [<span class="alpha">E</span>]</span>
+                            <button id="b23">cos</button>
+                        </td>
+                        <td>
+                            <span class="grn"><span class="shift">tan⁻¹</span> [<span class="alpha">F</span>]</span>
+                            <button id="b24">tan</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="shift">STO</span>
+                            <button id="b25">RCL</button>
+                        </td>
+                        <td>
+                            <span class="grn"><span class="shift">← </span> ί</span>
+                            <button id="b26">ENG</button>
+                        </td>
+                        <td>
+                            <span class="shift"> % </span>
+                            <button id="b27">(</button>
+                        </td>
+                        <td>
+                            <span class="shift">,</span> <span class="alpha">X</span>
+                            <button id="b28">)</button>
+                        </td>
+                        <td><span class="shift">
+                            <math display="inline-block" style="padding-bottom:2px;">
+                                <mrow>
+                                    <mn>a</mn>
+                                    <mfrac>
+                                        <mn>b</mn>
+                                        <mn>c</mn>
+                                    </mfrac>
+                                    <mn>⇔</mn>
+                                    <mfrac>
+                                        <mn>d</mn>
+                                        <mn>c</mn>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </span>&nbsp;
+                            <span class="alpha">Y</span>
+                            <button id="b29">S⇔D</button>
+                        </td>
+                        <td>
+                            <span class="shift">M-</span> <span class="alpha">M</span>
+                            <button id="b30">M+</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="lowr_buttons" id="lowr_buttons">
+                <table class="lwr_tbl table">
+                    <tr>
+                        <td>
+                            <span class="shift">CONST</span>
+                            <button id="b31">7</button>
+                        </td>
+                        <td>
+                            <span class="shift">CONV</span>
+                            <button id="b32">8</button>
+                        </td>
+                        <td>
+                            <span class="shift">CLR</span>
+                            <button id="b33">9</button>
+                        </td>
+                        <td>
+                            <span class="shift">INS</span>
+                            <button id="b34" style="background-color:orange;">DEL</button>
+                        </td>
+                        <td>
+                            <span class="shift">OFF</span>
+                            <button id="b35" style="background-color:orange">AC</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span style="color:black;font-size:9px;font-weight:700;">[<span
+                                    class="shift">MATRIX</span>]</span>
+                            <button id="b36">4</button>
+                        </td>
+                        <td>
+                            <span style="color:black;font-size:9px;font-weight:700;">[<span
+                                    class="shift">VECTOR</span>]</span>
+                            <button id="b37">5</button>
+                        </td>
+                        <td>
+                            <button id="b38" style="margin-top:19px;">6</button>
+                        </td>
+                        <td>
+                            <span class="shift">nPr</span>
+                            <button id="b39">X</button>
+                        </td>
+                        <td>
+                            <span class="shift">nCr</span>
+                            <button id="b40">÷</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span style="color:black;font-size:9px;font-weight:700;">[<span
+                                    class="shift">VECTOR</span>]</span>
+                            <button id="b41">1</button>
+                        </td>
+                        <td>
+                            <span class="grn">[<span class="shift">CMPLX</span>]</span>
+                            <button id="b42">2</button>
+                        </td>
+                        <td>
+                            <span class="grn">[<span class="shift">BASE</span>]</span>
+                            <button id="b43">3</button>
+                        </td>
+                        <td>
+                            <span class="shift">Pol</span>
+                            <button id="b44">+</button>
+                        </td>
+                        <td>
+                            <span class="shift">Rec</span>
+                            <button id="b45">-</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="shift">Rnd</span>
+                            <button id="b46">0</button>
+                        </td>
+                        <td>
+                            <span class="shift">Rnd#</span> <span class="alpha">Ranlnt</span>
+                            <button id="b47">●</button>
+                        </td>
+                        <td>
+                            <span class="shift" style="padding-right:20px;">π</span> <span class="alpha">e</span>
+                            <button id="b48">X10<sup>ϰ</sup></button>
+                        </td>
+                        <td>
+                            <span class="shift">DRG▶</span>
+                            <button id="b49">Ans</button>
+                        </td>
+                        <td>
+                            <button id="b50" style="margin-top:19px;">=</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
